@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:5000/api",
+    baseURL: String(import.meta.env.VITE_BACKEND_URI || "http://localhost:5000/api"),
 }, { withCredentials: true });
 
 export const apiConnector = async (method, url, data = {}, headers, config = {}) => {
