@@ -1,0 +1,188 @@
+{
+  "info": {
+    "_postman_id": "8b9e9a5f-7c01-4c90-9b9e-123456789abc",
+    "name": "Sweet Shop Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "sweetId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Saksham\",\n  \"email\": \"saksham@test.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"saksham@test.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sweets",
+      "item": [
+        {
+          "name": "Add Sweet",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Gulab Jamun\",\n  \"category\": \"Indian\",\n  \"price\": 20,\n  \"quantity\": 50\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets"]
+            }
+          }
+        },
+        {
+          "name": "Get All Sweets",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets"]
+            }
+          }
+        },
+        {
+          "name": "Search Sweets",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets/search?name=jamun&minPrice=10&maxPrice=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets", "search"],
+              "query": [
+                { "key": "name", "value": "jamun" },
+                { "key": "minPrice", "value": "10" },
+                { "key": "maxPrice", "value": "50" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Sweet",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 25\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets/{{sweetId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets", "{{sweetId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Sweet (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets/{{sweetId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets", "{{sweetId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Purchase Sweet",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets/{{sweetId}}/purchase",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets", "{{sweetId}}", "purchase"]
+            }
+          }
+        },
+        {
+          "name": "Restock Sweet (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 20\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sweets/{{sweetId}}/restock",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sweets", "{{sweetId}}", "restock"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
