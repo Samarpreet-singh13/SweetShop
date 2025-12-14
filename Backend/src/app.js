@@ -32,7 +32,5 @@ import sweet from "./routs/sweet.route.js";
 app.use("/api/auth", router); // Mount the user routes at the "/api/v1/users" endpoint
 app.use("/api/sweets", sweet); // Mount the user routes at the "/api/v1/users" endpoint
 
-// https://localhost:8000/api/v1/users/
-
 // Export the Express.js application instance for use in other parts of the application
 export { app };
